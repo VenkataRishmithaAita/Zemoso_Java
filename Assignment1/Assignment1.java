@@ -1,33 +1,24 @@
+package JavaAssignment;
 import java.io.File;
-import java.io.File;
-import java.nio.file.Files;
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-class PathFinder {
-    public static void main(String []args){
-        Scanner sc=new Scanner(System.in);
-        String find=sc.nextLine();
-        listFind("/home",find);
-    }
-
-    private static void listFind(String path,String find) {
-        File dir=new File(path);
-        File[] files=dir.listFiles();
-        if(files!=null && files.length>0){
-            for(File file:files){
-                if(file.isDirectory()){
-                    listFind(file.getAbsolutePath(),find);
-                }
-                else{
-                    String fileName=file.getName();
-                    if (fileName.matches("As.*")){
-                        String st=file.getAbsolutePath()+"."+fileName;
-                        if(st.contains(find)){
-                            System.out.println(file.getAbsolutePath() +" " +fileName);
-                        }
+public class Assignment1 {
+            public void printCurrentWorkingDirectory1() {
+                File userDirectory = new File("C:\\Users\\DELL\\Desktop\\Zemoso_Java");
+                Pattern pattern=Pattern.compile("Assignment[0-9]");
+                String contents[] = userDirectory.list();
+                File Filelist[] = userDirectory.listFiles();
+                for (int i = 0; i < contents.length; i++) {
+                    Matcher match= pattern.matcher(Filelist[i].getName());
+                    if (match.find()) {
+                        System.out.println(Filelist[i].getAbsolutePath());
                     }
                 }
-            }
         }
+    public static void main(String args[])
+    {
+        Assignment1 assignment1=new Assignment1();
+        assignment1.printCurrentWorkingDirectory1();
     }
 }
